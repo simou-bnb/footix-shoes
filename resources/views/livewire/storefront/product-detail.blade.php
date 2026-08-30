@@ -3,7 +3,28 @@
     $mainImage = $product->images->first();
 @endphp
 
-<div class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+<div x-data="{
+        initPixel() {
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'ViewContent', {
+                    content_ids: ['{{ $product->id }}'],
+                    content_name: '{{ addslashes($product->name) }}',
+                    content_type: 'product',
+                    value: {{ $displayPrice }},
+                    currency: 'DZD'
+                });
+            }
+        }
+    }"
+    x-init="initPixel()"
+    @cart-updated.window="if(typeof fbq !== 'undefined') fbq('track', 'AddToCart', {
+        content_ids: ['{{ $product->id }}'],
+        content_name: '{{ addslashes($product->name) }}',
+        content_type: 'product',
+        value: {{ $displayPrice }},
+        currency: 'DZD'
+    })"
+    class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     @if (session('added'))
         <div class="mb-6 border border-black bg-black text-white px-4 py-3 text-sm flex items-center justify-between">
             <span>{{ session('added') }} ajouté au panier.</span>

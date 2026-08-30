@@ -111,6 +111,8 @@ class ProductDetail extends Component
         return view('livewire.storefront.product-detail')->layout('layouts.storefront', [
             'title' => $this->product->name.' — Footix Shoes',
             'description' => $description,
+            'ogImage' => $this->product->images->first() ? \Illuminate\Support\Facades\Storage::disk('public')->url($this->product->images->first()->path) : null,
+            'ogUrl' => request()->url(),
         ]);
     }
 }
