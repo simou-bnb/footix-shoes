@@ -90,6 +90,9 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 text-sm">
             <p class="text-lg font-extrabold tracking-widest uppercase mb-2">Footix <span class="font-light">Shoes</span></p>
             <p class="text-white/60">Chaussures, vêtements &amp; accessoires — livraison dans toute l'Algérie, paiement à la réception.</p>
+            <div class="mt-4 flex flex-wrap gap-4">
+                <a href="{{ route('privacy') }}" wire:navigate class="text-white/40 hover:text-white/70 transition-colors">Politique de confidentialité</a>
+            </div>
             <p class="text-white/40 mt-6">&copy; {{ now()->year }} Footix Shoes.</p>
         </div>
     </footer>
