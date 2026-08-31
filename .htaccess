@@ -1,4 +1,9 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    
+    # Redirige les requêtes /storage directement vers les vrais fichiers (ignore le symlink cassé)
+    RewriteRule ^storage/(.*)$ storage/app/public/$1 [L]
+    
+    # Redirige tout le reste vers /public
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
