@@ -23,7 +23,7 @@
                         <div class="min-w-0">
                             <p class="font-medium uppercase text-sm tracking-wide truncate">{{ $item->variant->product->name }}</p>
                             <p class="text-sm text-black/50">{{ $item->variant->label }}</p>
-                            <p class="text-sm mt-1">{{ number_format($item->unitPrice, 0, ',', ' ') }} DA</p>
+                            <p class="text-sm mt-1" dir="ltr">{{ number_format($item->unitPrice, 0, ',', ' ') }} DA</p>
                         </div>
                     </div>
 
@@ -34,7 +34,7 @@
                             <button type="button" wire:click="updateQuantity({{ $item->variant->id }}, {{ $item->quantity + 1 }})" class="w-8 h-8 flex items-center justify-center">+</button>
                         </div>
 
-                        <p class="w-20 text-right font-medium shrink-0">{{ number_format($item->lineTotal, 0, ',', ' ') }} DA</p>
+                        <p class="w-20 text-right font-medium shrink-0" dir="ltr">{{ number_format($item->lineTotal, 0, ',', ' ') }} DA</p>
 
                         <button type="button" wire:click="removeItem({{ $item->variant->id }})" class="text-black/40 hover:text-black shrink-0" aria-label="Retirer">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -48,7 +48,7 @@
 
         <div class="mt-8 flex items-center justify-between border-t border-black pt-6">
             <span class="text-lg font-medium uppercase tracking-wide">{{ __('Sous-total') }}</span>
-            <span class="text-xl font-bold">{{ number_format($subtotal, 0, ',', ' ') }} DA</span>
+            <span class="text-xl font-bold" dir="ltr">{{ number_format($subtotal, 0, ',', ' ') }} DA</span>
         </div>
         <p class="text-sm text-black/50 mt-1">{{ __("Frais de livraison calculés à l'étape suivante selon ta wilaya.") }}</p>
 

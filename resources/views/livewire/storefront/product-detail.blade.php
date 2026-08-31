@@ -60,7 +60,7 @@
         <div>
             <p class="text-xs uppercase tracking-widest text-black/50 mb-2">{{ $product->category->name }}</p>
             <h1 class="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight mb-3">{{ $product->name }}</h1>
-            <p class="text-xl font-medium mb-6">{{ number_format($displayPrice, 0, ',', ' ') }} DA</p>
+            <p class="text-xl font-medium mb-6" dir="ltr" style="text-align: {{ app()->getLocale() === 'ar' ? 'right' : 'left' }};">{{ number_format($displayPrice, 0, ',', ' ') }} DA</p>
 
             @if ($this->sizes->isNotEmpty())
                 <div class="mb-5">

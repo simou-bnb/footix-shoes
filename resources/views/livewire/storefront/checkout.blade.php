@@ -73,7 +73,7 @@
                                     <input type="radio" wire:model.live="deliveryType" value="home" class="accent-white">
                                     {{ __('À domicile') }}
                                 </span>
-                                <span class="text-sm">{{ number_format($this->selectedWilaya->home_delivery_price, 0, ',', ' ') }} DA</span>
+                                <span class="text-sm" dir="ltr">{{ number_format($this->selectedWilaya->home_delivery_price, 0, ',', ' ') }} DA</span>
                             </label>
 
                             @if ($this->selectedWilaya->hasStopDesk())
@@ -82,7 +82,7 @@
                                         <input type="radio" wire:model.live="deliveryType" value="stopdesk" class="accent-white">
                                         {{ __('Stop Desk') }}
                                     </span>
-                                    <span class="text-sm">{{ number_format($this->selectedWilaya->stopdesk_delivery_price, 0, ',', ' ') }} DA</span>
+                                    <span class="text-sm" dir="ltr">{{ number_format($this->selectedWilaya->stopdesk_delivery_price, 0, ',', ' ') }} DA</span>
                                 </label>
                             @endif
                         </div>
@@ -107,7 +107,7 @@
                         @foreach ($items as $item)
                             <div class="flex justify-between text-sm">
                                 <span class="text-black/70">{{ $item->variant->product->name }} ({{ $item->variant->label }}) &times;{{ $item->quantity }}</span>
-                                <span class="shrink-0 ms-2">{{ number_format($item->lineTotal, 0, ',', ' ') }} DA</span>
+                                <span class="shrink-0 ms-2" dir="ltr">{{ number_format($item->lineTotal, 0, ',', ' ') }} DA</span>
                             </div>
                         @endforeach
                     </div>
@@ -115,15 +115,15 @@
                     <div class="border-t border-black/10 pt-3 space-y-2 text-sm">
                         <div class="flex justify-between">
                             <span>{{ __('Sous-total') }}</span>
-                            <span>{{ number_format($subtotal, 0, ',', ' ') }} DA</span>
+                            <span dir="ltr">{{ number_format($subtotal, 0, ',', ' ') }} DA</span>
                         </div>
                         <div class="flex justify-between">
                             <span>{{ __('Livraison') }}</span>
-                            <span>{{ $this->selectedWilaya ? number_format($this->deliveryPrice, 0, ',', ' ') . ' DA' : '—' }}</span>
+                            <span dir="ltr">{{ $this->selectedWilaya ? number_format($this->deliveryPrice, 0, ',', ' ') . ' DA' : '—' }}</span>
                         </div>
                         <div class="flex justify-between font-bold text-base border-t border-black/10 pt-2">
                             <span>{{ __('Total') }}</span>
-                            <span>{{ number_format($subtotal + $this->deliveryPrice, 0, ',', ' ') }} DA</span>
+                            <span dir="ltr">{{ number_format($subtotal + $this->deliveryPrice, 0, ',', ' ') }} DA</span>
                         </div>
                     </div>
 

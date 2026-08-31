@@ -13,5 +13,5 @@
         @endif
     </div>
     <h3 class="text-sm font-medium uppercase tracking-wide">{{ $product->name }}</h3>
-    <p class="text-sm text-black/60 mt-1">{{ number_format($product->base_price, 0, ',', ' ') }} DA</p>
+    <p class="text-sm text-black/60 mt-1" dir="ltr">{{ number_format($product->base_price, 0, ',', ' ') }} DA</p>
 </a>

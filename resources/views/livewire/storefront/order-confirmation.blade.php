@@ -33,7 +33,7 @@
             @foreach ($order->items as $item)
                 <div class="flex justify-between py-2 text-sm">
                     <span>{{ $item->product_name }} @if($item->variant_label && $item->variant_label !== 'Standard') ({{ $item->variant_label }}) @endif &times;{{ $item->quantity }}</span>
-                    <span>{{ number_format($item->line_total, 0, ',', ' ') }} DA</span>
+                    <span dir="ltr">{{ number_format($item->line_total, 0, ',', ' ') }} DA</span>
                 </div>
             @endforeach
         </div>
@@ -41,15 +41,15 @@
         <div class="border-t border-black/10 mt-3 pt-3 space-y-1 text-sm">
             <div class="flex justify-between">
                 <span>{{ __('Sous-total') }}</span>
-                <span>{{ number_format($order->subtotal, 0, ',', ' ') }} DA</span>
+                <span dir="ltr">{{ number_format($order->subtotal, 0, ',', ' ') }} DA</span>
             </div>
             <div class="flex justify-between">
                 <span>{{ __('Livraison') }} ({{ $order->delivery_type->getLabel() }} - {{ $order->wilaya->name }})</span>
-                <span>{{ number_format($order->delivery_price, 0, ',', ' ') }} DA</span>
+                <span dir="ltr">{{ number_format($order->delivery_price, 0, ',', ' ') }} DA</span>
             </div>
             <div class="flex justify-between font-bold text-base pt-1">
                 <span>{{ __('Total') }}</span>
-                <span>{{ number_format($order->total, 0, ',', ' ') }} DA</span>
+                <span dir="ltr">{{ number_format($order->total, 0, ',', ' ') }} DA</span>
             </div>
         </div>
     </div>
