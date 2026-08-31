@@ -15,13 +15,13 @@ class CategoryForm
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->label('Nom')
+                    ->label(__('Nom'))
                     ->required(),
                 Textarea::make('description')
-                    ->label('Description')
+                    ->label(__('Description'))
                     ->columnSpanFull(),
                 FileUpload::make('image')
-                    ->label('Image')
+                    ->label(__('Image'))
                     ->image()
                     ->disk('public')
                     ->directory('categories')
@@ -29,7 +29,7 @@ class CategoryForm
                     ->imageResizeTargetWidth(800)
                     ->imageResizeTargetHeight(800),
                 Toggle::make('is_active')
-                    ->label('Actif')
+                    ->label(__('Actif'))
                     ->default(true)
                     ->required(),
             ]);

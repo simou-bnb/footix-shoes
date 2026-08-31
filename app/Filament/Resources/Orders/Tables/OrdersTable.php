@@ -17,51 +17,51 @@ class OrdersTable
         return $table
             ->columns([
                 TextColumn::make('order_number')
-                    ->label('N° commande')
+                    ->label(__('N° commande'))
                     ->searchable(),
                 TextColumn::make('customer_name')
-                    ->label('Client')
+                    ->label(__('Client'))
                     ->searchable(),
                 TextColumn::make('customer_phone')
-                    ->label('Téléphone')
+                    ->label(__('Téléphone'))
                     ->searchable(),
                 TextColumn::make('wilaya.name')
-                    ->label('Wilaya')
+                    ->label(__('Wilaya'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('delivery_type')
-                    ->label('Livraison')
+                    ->label(__('Livraison'))
                     ->badge(),
                 TextColumn::make('total')
-                    ->label('Total')
+                    ->label(__('Total'))
                     ->money('DZD')
                     ->sortable(),
                 SelectColumn::make('status')
-                    ->label('Statut')
+                    ->label(__('Statut'))
                     ->options(OrderStatus::class),
                 TextColumn::make('created_at')
-                    ->label('Reçue le')
+                    ->label(__('Reçue le'))
                     ->dateTime('d/m/Y H:i')
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
                 SelectFilter::make('status')
-                    ->label('Statut')
+                    ->label(__('Statut'))
                     ->options(OrderStatus::class),
                 SelectFilter::make('wilaya_id')
-                    ->label('Wilaya')
+                    ->label(__('Wilaya'))
                     ->relationship('wilaya', 'name')
                     ->searchable(),
                 SelectFilter::make('delivery_type')
-                    ->label('Livraison')
+                    ->label(__('Livraison'))
                     ->options(DeliveryType::class),
             ])
             ->recordActions([
                 EditAction::make()
-                    ->label('Voir'),
+                    ->label(__('Voir')),
             ])
-            ->emptyStateHeading('Aucune commande pour le moment')
-            ->emptyStateDescription('Les commandes passées sur le site apparaîtront ici.');
+            ->emptyStateHeading(__('Aucune commande pour le moment'))
+            ->emptyStateDescription(__('Les commandes passées sur le site apparaîtront ici.'));
     }
 }

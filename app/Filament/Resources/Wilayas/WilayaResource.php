@@ -20,11 +20,20 @@ class WilayaResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
 
-    protected static ?string $navigationLabel = 'Wilayas & Livraison';
+    public static function getNavigationLabel(): string
+    {
+        return __('Wilayas & Livraison');
+    }
 
-    protected static ?string $modelLabel = 'Wilaya';
+    public static function getModelLabel(): string
+    {
+        return __('Wilaya');
+    }
 
-    protected static ?string $pluralModelLabel = 'Wilayas';
+    public static function getPluralModelLabel(): string
+    {
+        return __('Wilayas');
+    }
 
     public static function form(Schema $schema): Schema
     {

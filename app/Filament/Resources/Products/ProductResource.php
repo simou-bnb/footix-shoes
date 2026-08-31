@@ -22,11 +22,20 @@ class ProductResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingBag;
 
-    protected static ?string $navigationLabel = 'Produits';
+    public static function getNavigationLabel(): string
+    {
+        return __('Produits');
+    }
 
-    protected static ?string $modelLabel = 'produit';
+    public static function getModelLabel(): string
+    {
+        return __('produit');
+    }
 
-    protected static ?string $pluralModelLabel = 'produits';
+    public static function getPluralModelLabel(): string
+    {
+        return __('produits');
+    }
 
     public static function form(Schema $schema): Schema
     {

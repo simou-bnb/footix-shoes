@@ -22,32 +22,32 @@ class ProductsTable
                     ->label('')
                     ->limit(1),
                 TextColumn::make('name')
-                    ->label('Nom')
+                    ->label(__('Nom'))
                     ->searchable(),
                 TextColumn::make('category.name')
-                    ->label('Catégorie')
+                    ->label(__('Catégorie'))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('base_price')
-                    ->label('Prix')
+                    ->label(__('Prix'))
                     ->money('DZD')
                     ->sortable(),
                 TextColumn::make('variants_count')
                     ->counts('variants')
-                    ->label('Variantes'),
+                    ->label(__('Variantes')),
                 TextColumn::make('variants_sum_stock')
                     ->sum('variants', 'stock')
-                    ->label('Stock total'),
+                    ->label(__('Stock total')),
                 IconColumn::make('is_active')
-                    ->label('Publié')
+                    ->label(__('Publié'))
                     ->boolean(),
             ])
             ->filters([
                 SelectFilter::make('category_id')
-                    ->label('Catégorie')
+                    ->label(__('Catégorie'))
                     ->relationship('category', 'name'),
                 TernaryFilter::make('is_active')
-                    ->label('Publié'),
+                    ->label(__('Publié')),
             ])
             ->recordActions([
                 EditAction::make(),
@@ -57,6 +57,6 @@ class ProductsTable
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('Aucun produit pour le moment');
+            ->emptyStateHeading(__('Aucun produit pour le moment'));
     }
 }

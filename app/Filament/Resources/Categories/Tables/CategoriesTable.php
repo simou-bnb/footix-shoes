@@ -19,13 +19,13 @@ class CategoriesTable
                 ImageColumn::make('image')
                     ->label(''),
                 TextColumn::make('name')
-                    ->label('Nom')
+                    ->label(__('Nom'))
                     ->searchable(),
                 TextColumn::make('products_count')
                     ->counts('products')
-                    ->label('Produits'),
+                    ->label(__('Produits')),
                 IconColumn::make('is_active')
-                    ->label('Actif')
+                    ->label(__('Actif'))
                     ->boolean(),
             ])
             ->defaultSort('sort_order')
@@ -41,6 +41,6 @@ class CategoriesTable
                     DeleteBulkAction::make(),
                 ]),
             ])
-            ->emptyStateHeading('Aucune catégorie pour le moment');
+            ->emptyStateHeading(__('Aucune catégorie pour le moment'));
     }
 }

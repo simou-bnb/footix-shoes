@@ -20,11 +20,20 @@ class OrderResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShoppingCart;
 
-    protected static ?string $navigationLabel = 'Commandes';
+    public static function getNavigationLabel(): string
+    {
+        return __('Commandes');
+    }
 
-    protected static ?string $modelLabel = 'commande';
+    public static function getModelLabel(): string
+    {
+        return __('commande');
+    }
 
-    protected static ?string $pluralModelLabel = 'commandes';
+    public static function getPluralModelLabel(): string
+    {
+        return __('commandes');
+    }
 
     public static function form(Schema $schema): Schema
     {

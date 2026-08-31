@@ -15,24 +15,24 @@ class ProductForm
         return $schema
             ->components([
                 Select::make('category_id')
-                    ->label('Catégorie')
+                    ->label(__('Catégorie'))
                     ->relationship('category', 'name')
                     ->searchable()
                     ->preload()
                     ->required(),
                 TextInput::make('name')
-                    ->label('Nom')
+                    ->label(__('Nom'))
                     ->required(),
                 TextInput::make('base_price')
-                    ->label('Prix de base')
+                    ->label(__('Prix de base'))
                     ->required()
                     ->numeric()
                     ->suffix('DA'),
                 RichEditor::make('description')
-                    ->label('Description')
+                    ->label(__('Description'))
                     ->columnSpanFull(),
                 Toggle::make('is_active')
-                    ->label('Publié')
+                    ->label(__('Publié'))
                     ->default(true)
                     ->required(),
             ]);

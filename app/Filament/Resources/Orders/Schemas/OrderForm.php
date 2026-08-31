@@ -16,73 +16,73 @@ class OrderForm
     {
         return $schema
             ->components([
-                Section::make('Client')
+                Section::make(__('Client'))
                     ->columns(2)
                     ->components([
                         TextInput::make('order_number')
-                            ->label('N° de commande')
+                            ->label(__('N° de commande'))
                             ->disabled()
                             ->dehydrated(false),
                         TextInput::make('customer_name')
-                            ->label('Nom du client')
+                            ->label(__('Nom du client'))
                             ->disabled()
                             ->dehydrated(false),
                         TextInput::make('customer_phone')
-                            ->label('Téléphone')
+                            ->label(__('Téléphone'))
                             ->disabled()
                             ->dehydrated(false),
                         TextInput::make('wilaya.name')
-                            ->label('Wilaya')
+                            ->label(__('Wilaya'))
                             ->formatStateUsing(fn ($state, $record) => $state ?: $record?->wilaya?->name)
                             ->disabled()
                             ->dehydrated(false),
                         TextInput::make('commune')
-                            ->label('Commune')
+                            ->label(__('Commune'))
                             ->disabled()
                             ->dehydrated(false),
                         TextInput::make('delivery_type')
-                            ->label('Type de livraison')
+                            ->label(__('Type de livraison'))
                             ->formatStateUsing(fn ($state) => $state instanceof DeliveryType ? $state->getLabel() : DeliveryType::tryFrom((string) $state)?->getLabel())
                             ->disabled()
                             ->dehydrated(false),
                         Textarea::make('address')
-                            ->label('Adresse')
+                            ->label(__('Adresse'))
                             ->disabled()
                             ->dehydrated(false)
                             ->columnSpanFull(),
                     ]),
-                Section::make('Montants')
+                Section::make(__('Montants'))
                     ->columns(3)
                     ->components([
                         TextInput::make('subtotal')
-                            ->label('Sous-total')
+                            ->label(__('Sous-total'))
                             ->numeric()
                             ->suffix('DA')
                             ->disabled()
                             ->dehydrated(false),
                         TextInput::make('delivery_price')
-                            ->label('Livraison')
+                            ->label(__('Livraison'))
                             ->numeric()
                             ->suffix('DA')
                             ->disabled()
                             ->dehydrated(false),
                         TextInput::make('total')
-                            ->label('Total')
+                            ->label(__('Total'))
                             ->numeric()
                             ->suffix('DA')
                             ->disabled()
                             ->dehydrated(false),
                     ]),
-                Section::make('Suivi')
+                Section::make(__('Suivi'))
                     ->columns(1)
                     ->components([
                         Select::make('status')
-                            ->label('Statut')
+                            ->label(__('Statut'))
                             ->options(OrderStatus::class)
                             ->required(),
                         Textarea::make('notes')
-                            ->label('Notes internes')
-                            ->helperText('Ex: "Appelé, pas de réponse", "Confirmé par téléphone"...')
+                            ->label(__('Notes internes'))
+                            ->helperText(__('Ex: "Appelé, pas de réponse", "Confirmé par téléphone"...'))
                             ->columnSpanFull(),
                     ]),
             ]);

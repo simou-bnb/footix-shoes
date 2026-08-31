@@ -16,20 +16,20 @@ class WilayasTable
         return $table
             ->columns([
                 TextColumn::make('code')
-                    ->label('Code')
+                    ->label(__('Code'))
                     ->searchable(),
                 TextColumn::make('name')
-                    ->label('Wilaya')
+                    ->label(__('Wilaya'))
                     ->searchable(),
                 TextInputColumn::make('home_delivery_price')
-                    ->label('Livraison à domicile (DA)')
+                    ->label(__('Livraison à domicile (DA)'))
                     ->type('number'),
                 TextInputColumn::make('stopdesk_delivery_price')
-                    ->label('Livraison stop desk (DA)')
+                    ->label(__('Livraison stop desk (DA)'))
                     ->type('number')
-                    ->placeholder('non disponible'),
+                    ->placeholder(__('non disponible')),
                 ToggleColumn::make('is_active')
-                    ->label('Active'),
+                    ->label(__('Active')),
             ])
             ->defaultSort('code')
             ->paginated(false)
