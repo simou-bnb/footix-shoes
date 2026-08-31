@@ -1,11 +1,11 @@
 <div class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-    <h1 class="text-3xl font-extrabold uppercase tracking-tight mb-8 border-b border-black pb-6">Panier</h1>
+    <h1 class="text-3xl font-extrabold uppercase tracking-tight mb-8 border-b border-black pb-6">{{ __('Panier') }}</h1>
 
     @if ($items->isEmpty())
         <div class="text-center py-16">
-            <p class="text-black/60 mb-6">Ton panier est vide.</p>
+            <p class="text-black/60 mb-6">{{ __('Ton panier est vide.') }}</p>
             <a href="{{ route('home') }}" wire:navigate class="inline-block px-6 py-3 bg-black text-white text-sm font-medium uppercase tracking-wide">
-                Continuer mes achats
+                {{ __('Continuer mes achats') }}
             </a>
         </div>
     @else
@@ -47,13 +47,13 @@
         </div>
 
         <div class="mt-8 flex items-center justify-between border-t border-black pt-6">
-            <span class="text-lg font-medium uppercase tracking-wide">Sous-total</span>
+            <span class="text-lg font-medium uppercase tracking-wide">{{ __('Sous-total') }}</span>
             <span class="text-xl font-bold">{{ number_format($subtotal, 0, ',', ' ') }} DA</span>
         </div>
-        <p class="text-sm text-black/50 mt-1">Frais de livraison calculés à l'étape suivante selon ta wilaya.</p>
+        <p class="text-sm text-black/50 mt-1">{{ __("Frais de livraison calculés à l'étape suivante selon ta wilaya.") }}</p>
 
         <a href="{{ route('checkout') }}" wire:navigate class="mt-6 block text-center w-full py-4 bg-black text-white font-medium uppercase tracking-wide hover:opacity-90">
-            Passer la commande
+            {{ __('Passer la commande') }}
         </a>
     @endif
 </div>

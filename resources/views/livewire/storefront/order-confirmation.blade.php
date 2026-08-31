@@ -20,13 +20,13 @@
         </svg>
     </div>
 
-    <h1 class="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight mb-2">Merci, {{ $order->customer_name }} !</h1>
-    <p class="text-black/60 mb-1">Ta commande a bien été enregistrée.</p>
+    <h1 class="text-2xl sm:text-3xl font-extrabold uppercase tracking-tight mb-2">{{ __('Merci, :name !', ['name' => $order->customer_name]) }}</h1>
+    <p class="text-black/60 mb-1">{{ __('Ta commande a bien été enregistrée.') }}</p>
     <p class="font-medium mb-8">N&deg; {{ $order->order_number }}</p>
 
     <div class="border border-black text-left p-6 mb-8">
         <p class="text-sm mb-4">
-            <strong>On t'appelle au {{ $order->customer_phone }} pour confirmer ta commande</strong> avant l'expédition.
+            <strong>{{ __("On t'appelle au :phone pour confirmer ta commande", ['phone' => $order->customer_phone]) }}</strong> {{ __("avant l'expédition.") }}
         </p>
 
         <div class="divide-y divide-black/10">
@@ -40,21 +40,21 @@
 
         <div class="border-t border-black/10 mt-3 pt-3 space-y-1 text-sm">
             <div class="flex justify-between">
-                <span>Sous-total</span>
+                <span>{{ __('Sous-total') }}</span>
                 <span>{{ number_format($order->subtotal, 0, ',', ' ') }} DA</span>
             </div>
             <div class="flex justify-between">
-                <span>Livraison ({{ $order->delivery_type->getLabel() }} - {{ $order->wilaya->name }})</span>
+                <span>{{ __('Livraison') }} ({{ $order->delivery_type->getLabel() }} - {{ $order->wilaya->name }})</span>
                 <span>{{ number_format($order->delivery_price, 0, ',', ' ') }} DA</span>
             </div>
             <div class="flex justify-between font-bold text-base pt-1">
-                <span>Total</span>
+                <span>{{ __('Total') }}</span>
                 <span>{{ number_format($order->total, 0, ',', ' ') }} DA</span>
             </div>
         </div>
     </div>
 
     <a href="{{ route('home') }}" wire:navigate class="inline-block px-6 py-3 bg-black text-white text-sm font-medium uppercase tracking-wide">
-        Continuer mes achats
+        {{ __('Continuer mes achats') }}
     </a>
 </div>

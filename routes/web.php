@@ -16,3 +16,10 @@ Route::get('/panier', CartPage::class)->name('cart');
 Route::get('/commander', Checkout::class)->name('checkout');
 Route::get('/commande/confirmation/{order:order_number}', OrderConfirmation::class)->name('order.confirmation');
 Route::get('/politique-de-confidentialite', PrivacyPolicy::class)->name('privacy');
+
+Route::get('/lang/{locale}', function (string $locale) {
+    if (in_array($locale, ['fr', 'ar'])) {
+        session()->put('locale', $locale);
+    }
+    return back();
+})->name('lang.switch');

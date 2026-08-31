@@ -8,7 +8,7 @@
             <img src="{{ Storage::disk('public')->url($image->path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
         @else
             <div class="w-full h-full flex items-center justify-center text-neutral-300 text-xs uppercase tracking-wide">
-                Pas de photo
+                {{ __('Pas de photo') }}
             </div>
         @endif
     </div>

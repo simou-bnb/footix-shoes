@@ -28,8 +28,8 @@
     class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
     @if (session('added'))
         <div class="mb-6 border border-black bg-black text-white px-4 py-3 text-sm flex items-center justify-between">
-            <span>{{ session('added') }} ajouté au panier.</span>
-            <a href="{{ route('cart') }}" wire:navigate class="underline font-medium">Voir le panier</a>
+            <span>{{ session('added') }} {{ __('ajouté au panier.') }}</span>
+            <a href="{{ route('cart') }}" wire:navigate class="underline font-medium">{{ __('Voir le panier') }}</a>
         </div>
     @endif
 
@@ -40,7 +40,7 @@
                 @if ($mainImage)
                     <img :src="selectedImage" alt="{{ $product->name }}" class="w-full h-full object-contain">
                 @else
-                    <div class="w-full h-full flex items-center justify-center text-neutral-300 text-xs uppercase tracking-wide">Pas de photo</div>
+                    <div class="w-full h-full flex items-center justify-center text-neutral-300 text-xs uppercase tracking-wide">{{ __('Pas de photo') }}</div>
                 @endif
             </div>
             @if ($product->images->count() > 1)
@@ -64,7 +64,7 @@
 
             @if ($this->sizes->isNotEmpty())
                 <div class="mb-5">
-                    <p class="text-xs uppercase tracking-wide font-medium mb-2">Taille</p>
+                    <p class="text-xs uppercase tracking-wide font-medium mb-2">{{ __('Taille') }}</p>
                     <div class="flex flex-wrap gap-2">
                         @foreach ($this->sizes as $size)
                             <button type="button" wire:click="$set('selectedSize', '{{ $size }}')"
@@ -78,7 +78,7 @@
 
             @if ($this->colors->isNotEmpty())
                 <div class="mb-5">
-                    <p class="text-xs uppercase tracking-wide font-medium mb-2">Couleur</p>
+                    <p class="text-xs uppercase tracking-wide font-medium mb-2">{{ __('Couleur') }}</p>
                     <div class="flex flex-wrap gap-2">
                         @foreach ($this->colors as $color)
                             <button type="button" wire:click="$set('selectedColor', '{{ $color }}')"
@@ -93,12 +93,12 @@
             <div class="mb-6 text-sm">
                 @if ($this->selectedVariant)
                     @if ($this->selectedVariant->stock > 0)
-                        <span class="text-green-700">{{ $this->selectedVariant->stock <= 5 ? 'Plus que ' . $this->selectedVariant->stock . ' en stock' : 'En stock' }}</span>
+                        <span class="text-green-700">{{ $this->selectedVariant->stock <= 5 ? __('Plus que :count en stock', ['count' => $this->selectedVariant->stock]) : __('En stock') }}</span>
                     @else
-                        <span class="text-red-600">Rupture de stock</span>
+                        <span class="text-red-600">{{ __('Rupture de stock') }}</span>
                     @endif
                 @elseif ($this->sizes->isNotEmpty() || $this->colors->isNotEmpty())
-                    <span class="text-black/50">Choisis une option pour voir la disponibilité</span>
+                    <span class="text-black/50">{{ __('Choisis une option pour voir la disponibilité') }}</span>
                 @endif
             </div>
 
@@ -107,7 +107,7 @@
             @endif
 
             <div class="flex items-center gap-3 mb-4">
-                <span class="text-xs uppercase tracking-wide font-medium">Quantité</span>
+                <span class="text-xs uppercase tracking-wide font-medium">{{ __('Quantité') }}</span>
                 <div class="flex items-center border border-black">
                     <button type="button" wire:click="$set('quantity', {{ max(1, $quantity - 1) }})" class="w-10 h-10 flex items-center justify-center">−</button>
                     <span class="w-10 text-center">{{ $quantity }}</span>
@@ -119,12 +119,12 @@
 
             <button type="button" wire:click="orderNow" @if ($unavailable) disabled @endif
                 class="w-full h-12 bg-black text-white text-sm font-bold uppercase tracking-wide disabled:opacity-30 disabled:cursor-not-allowed hover:opacity-90 mb-3">
-                Commander maintenant
+                {{ __('Commander maintenant') }}
             </button>
 
             <button type="button" wire:click="addToCart" @if ($unavailable) disabled @endif
                 class="w-full h-11 border border-black text-black text-sm font-medium uppercase tracking-wide disabled:opacity-30 disabled:cursor-not-allowed hover:bg-black hover:text-white transition-colors mb-6">
-                Ajouter au panier
+                {{ __('Ajouter au panier') }}
             </button>
 
             @if ($product->description)

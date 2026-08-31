@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,6 +63,12 @@
                 <div class="flex items-center gap-2">
                     @livewire('storefront.cart-counter')
 
+                    <div class="hidden md:flex items-center gap-2 text-xs font-bold uppercase tracking-wide border-s border-black ps-4 ms-2">
+                        <a href="{{ route('lang.switch', 'fr') }}" wire:navigate class="{{ app()->getLocale() === 'fr' ? 'text-black' : 'text-black/40 hover:text-black transition-colors' }}">FR</a>
+                        <span>/</span>
+                        <a href="{{ route('lang.switch', 'ar') }}" wire:navigate class="{{ app()->getLocale() === 'ar' ? 'text-black' : 'text-black/40 hover:text-black transition-colors' }}">عربي</a>
+                    </div>
+
                     <button type="button" class="md:hidden inline-flex items-center justify-center w-10 h-10" @click="mobileOpen = !mobileOpen" aria-label="Menu">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                             <path x-show="!mobileOpen" stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
@@ -78,6 +84,10 @@
                         {{ $navCategoryMobile->name }}
                     </a>
                 @endforeach
+                <div class="flex items-center gap-4 pt-4 mt-2 border-t border-black/10">
+                    <a href="{{ route('lang.switch', 'fr') }}" wire:navigate class="{{ app()->getLocale() === 'fr' ? 'text-black font-bold' : 'text-black/50' }}">Français</a>
+                    <a href="{{ route('lang.switch', 'ar') }}" wire:navigate class="{{ app()->getLocale() === 'ar' ? 'text-black font-bold' : 'text-black/50' }}">العربية</a>
+                </div>
             </nav>
         </div>
     </header>
@@ -89,9 +99,9 @@
     <footer class="bg-black text-white mt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10 text-sm">
             <p class="text-lg font-extrabold tracking-widest uppercase mb-2">Footix <span class="font-light">Shoes</span></p>
-            <p class="text-white/60">Chaussures, vêtements &amp; accessoires — livraison dans toute l'Algérie, paiement à la réception.</p>
+            <p class="text-white/60">{{ __("Chaussures, vêtements & accessoires — livraison dans toute l'Algérie, paiement à la réception.") }}</p>
             <div class="mt-4 flex flex-wrap gap-4">
-                <a href="{{ route('privacy') }}" wire:navigate class="text-white/40 hover:text-white/70 transition-colors">Politique de confidentialité</a>
+                <a href="{{ route('privacy') }}" wire:navigate class="text-white/40 hover:text-white/70 transition-colors">{{ __('Politique de confidentialité') }}</a>
             </div>
             <p class="text-white/40 mt-6">&copy; {{ now()->year }} Footix Shoes.</p>
         </div>

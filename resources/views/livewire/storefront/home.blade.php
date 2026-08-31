@@ -23,7 +23,7 @@
 
     @if ($products->isNotEmpty())
         <section class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
-            <h2 class="text-xl font-bold uppercase tracking-wide mb-6">Nouveautés</h2>
+            <h2 class="text-xl font-bold uppercase tracking-wide mb-6">{{ __('Nouveautés') }}</h2>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
                 @foreach ($products as $product)
                     @include('livewire.storefront.partials.product-card', ['product' => $product])
