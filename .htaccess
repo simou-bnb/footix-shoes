@@ -1,6 +1,10 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
     
+    # Arrête la réécriture si on est déjà dans le bon dossier
+    RewriteRule ^public/ - [L]
+    RewriteRule ^storage/app/public/ - [L]
+    
     # Redirige les requêtes /storage directement vers les vrais fichiers (ignore le symlink cassé)
     RewriteRule ^storage/(.*)$ storage/app/public/$1 [L]
     
