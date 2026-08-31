@@ -155,6 +155,12 @@ class Checkout extends Component
         $cart->clear();
         $this->dispatch('cart-updated');
 
+        \App\Jobs\SendMetaPurchaseEvent::dispatch(
+            $order,
+            request()->ip(),
+            request()->userAgent()
+        );
+
         $this->redirect(route('order.confirmation', $order), navigate: true);
     }
 
