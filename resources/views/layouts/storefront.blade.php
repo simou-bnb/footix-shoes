@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? config('app.name') }}</title>
     <meta name="description" content="{{ $description ?? 'Footix Shoes — chaussures, vêtements et accessoires en Algérie. Paiement à la livraison.' }}">
+    <meta name="facebook-domain-verification" content="a77pj5zcl1okvtn4266viu09aty6j5" />
 
     {{-- Open Graph Meta Tags --}}
     <meta property="og:title" content="{{ $title ?? config('app.name') }}" />
