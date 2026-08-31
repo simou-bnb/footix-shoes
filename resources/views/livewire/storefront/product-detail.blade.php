@@ -4,6 +4,7 @@
 @endphp
 
 <div x-data="{
+        selectedImage: '{{ $mainImage ? Storage::disk('public')->url($mainImage->path) : '' }}',
         initPixel() {
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'ViewContent', {
@@ -35,9 +36,9 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
         {{-- Gallery --}}
         <div>
-            <div class="aspect-square bg-neutral-100 overflow-hidden mb-3">
+            <div class="aspect-square bg-white overflow-hidden mb-3 border border-neutral-100">
                 @if ($mainImage)
-                    <img src="{{ Storage::disk('public')->url($mainImage->path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                    <img :src="selectedImage" alt="{{ $product->name }}" class="w-full h-full object-contain">
                 @else
                     <div class="w-full h-full flex items-center justify-center text-neutral-300 text-xs uppercase tracking-wide">Pas de photo</div>
                 @endif
@@ -45,8 +46,10 @@
             @if ($product->images->count() > 1)
                 <div class="grid grid-cols-5 gap-2">
                     @foreach ($product->images as $image)
-                        <div class="aspect-square bg-neutral-100 overflow-hidden">
-                            <img src="{{ Storage::disk('public')->url($image->path) }}" alt="{{ $product->name }}" class="w-full h-full object-cover">
+                        <div class="aspect-square bg-white overflow-hidden cursor-pointer border hover:border-black transition-colors"
+                             :class="{ 'border-black': selectedImage === '{{ Storage::disk('public')->url($image->path) }}', 'border-neutral-100': selectedImage !== '{{ Storage::disk('public')->url($image->path) }}' }"
+                             @click="selectedImage = '{{ Storage::disk('public')->url($image->path) }}'">
+                            <img src="{{ Storage::disk('public')->url($image->path) }}" alt="{{ $product->name }}" class="w-full h-full object-contain p-1">
                         </div>
                     @endforeach
                 </div>
