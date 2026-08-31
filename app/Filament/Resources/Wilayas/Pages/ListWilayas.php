@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Wilayas\Pages;
 
 use App\Filament\Resources\Wilayas\WilayaResource;
+use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
 class ListWilayas extends ListRecords
@@ -11,6 +12,9 @@ class ListWilayas extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [];
+        return [
+            CreateAction::make()
+                ->label('Nouvelle Wilaya'),
+        ];
     }
 }
