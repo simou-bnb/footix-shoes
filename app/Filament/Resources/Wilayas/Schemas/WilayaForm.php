@@ -13,19 +13,28 @@ class WilayaForm
         return $schema
             ->components([
                 TextInput::make('code')
-                    ->required(),
+                    ->label('Code Wilaya (ex: 16)')
+                    ->required()
+                    ->maxLength(2),
                 TextInput::make('name')
+                    ->label('Nom de la Wilaya')
                     ->required(),
                 TextInput::make('home_delivery_price')
+                    ->label('Prix livraison à domicile')
                     ->required()
                     ->numeric()
-                    ->default(0.0)
-                    ->prefix('$'),
+                    ->default(0)
+                    ->suffix('DA'),
                 TextInput::make('stopdesk_delivery_price')
+                    ->label('Prix livraison stop desk')
                     ->numeric()
                     ->default(null)
-                    ->prefix('$'),
+                    ->nullable()
+                    ->suffix('DA')
+                    ->placeholder('Laisser vide si non disponible'),
                 Toggle::make('is_active')
+                    ->label('Wilaya active')
+                    ->default(true)
                     ->required(),
             ]);
     }

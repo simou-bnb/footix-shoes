@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Wilayas\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\TextInputColumn;
 use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Table;
 
 class WilayasTable
@@ -31,10 +33,11 @@ class WilayasTable
             ])
             ->defaultSort('code')
             ->paginated(false)
-            ->filters([
-                //
+            ->filters([])
+            ->recordActions([
+                EditAction::make(),
+                DeleteAction::make(),
             ])
-            ->recordActions([])
             ->toolbarActions([]);
     }
 }

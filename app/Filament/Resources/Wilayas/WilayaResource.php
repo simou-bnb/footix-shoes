@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources\Wilayas;
 
+use App\Filament\Resources\Wilayas\Pages\CreateWilaya;
+use App\Filament\Resources\Wilayas\Pages\EditWilaya;
 use App\Filament\Resources\Wilayas\Pages\ListWilayas;
 use App\Filament\Resources\Wilayas\Schemas\WilayaForm;
 use App\Filament\Resources\Wilayas\Tables\WilayasTable;
@@ -18,11 +20,11 @@ class WilayaResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTruck;
 
-    protected static ?string $navigationLabel = 'Wilayas';
+    protected static ?string $navigationLabel = 'Wilayas & Livraison';
 
-    protected static ?string $modelLabel = 'wilaya';
+    protected static ?string $modelLabel = 'Wilaya';
 
-    protected static ?string $pluralModelLabel = 'wilayas';
+    protected static ?string $pluralModelLabel = 'Wilayas';
 
     public static function form(Schema $schema): Schema
     {
@@ -36,20 +38,15 @@ class WilayaResource extends Resource
 
     public static function getRelations(): array
     {
-        return [
-            //
-        ];
-    }
-
-    public static function canCreate(): bool
-    {
-        return false;
+        return [];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListWilayas::route('/'),
+            'index'  => ListWilayas::route('/'),
+            'create' => CreateWilaya::route('/create'),
+            'edit'   => EditWilaya::route('/{record}/edit'),
         ];
     }
 }
