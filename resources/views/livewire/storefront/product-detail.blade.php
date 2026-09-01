@@ -3,21 +3,7 @@
     $mainImage = $product->images->first();
 @endphp
 
-<div x-data="{
-        selectedImage: '{{ $mainImage ? Storage::disk('public')->url($mainImage->path) : '' }}',
-        initPixel() {
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'ViewContent', {
-                    content_ids: ['{{ $product->id }}'],
-                    content_name: '{{ addslashes($product->name) }}',
-                    content_type: 'product',
-                    value: {{ $displayPrice }},
-                    currency: 'DZD'
-                });
-            }
-        }
-    }"
-    x-init="initPixel()"
+<div x-data="{ selectedImage: '{{ $mainImage ? Storage::disk('public')->url($mainImage->path) : '' }}' }"
     @cart-updated.window="if(typeof fbq !== 'undefined') fbq('track', 'AddToCart', {
         content_ids: ['{{ $product->id }}'],
         content_name: '{{ addslashes($product->name) }}',
@@ -26,6 +12,18 @@
         currency: 'DZD'
     })"
     class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+<script>
+    window.__metaPixelEvent = {
+        name: 'ViewContent',
+        data: {
+            content_ids: ['{{ $product->id }}'],
+            content_name: '{{ addslashes($product->name) }}',
+            content_type: 'product',
+            value: {{ $displayPrice }},
+            currency: 'DZD'
+        }
+    };
+</script>
     @if (session('added'))
         <div class="mb-6 border border-black bg-black text-white px-4 py-3 text-sm flex items-center justify-between">
             <span>{{ session('added') }} {{ __('ajouté au panier.') }}</span>

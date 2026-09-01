@@ -31,6 +31,15 @@
         'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '{{ config('services.meta.pixel_id') }}');
         fbq('track', 'PageView');
+
+        // Fire queued Pixel events after Livewire SPA navigation
+        document.addEventListener('livewire:navigated', function () {
+            fbq('track', 'PageView');
+            if (window.__metaPixelEvent) {
+                fbq('track', window.__metaPixelEvent.name, window.__metaPixelEvent.data);
+                window.__metaPixelEvent = null;
+            }
+        });
         </script>
         <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ config('services.meta.pixel_id') }}&ev=PageView&noscript=1" /></noscript>
     @endif

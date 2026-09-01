@@ -1,19 +1,16 @@
-<div
-    x-data="{
-        firePurchasePixel() {
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Purchase', {
-                    value: {{ $order->total }},
-                    currency: 'DZD',
-                    content_type: 'product',
-                    content_ids: [{{ $order->items->pluck('product_variant_id')->implode(',') }}],
-                    num_items: {{ $order->items->sum('quantity') }}
-                });
-            }
+<div class="max-w-2xl mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
+<script>
+    window.__metaPixelEvent = {
+        name: 'Purchase',
+        data: {
+            value: {{ $order->total }},
+            currency: 'DZD',
+            content_type: 'product',
+            content_ids: [{{ $order->items->pluck('product_variant_id')->implode(',') }}],
+            num_items: {{ $order->items->sum('quantity') }}
         }
-    }"
-    x-init="firePurchasePixel()"
-    class="max-w-2xl mx-auto px-4 sm:px-6 py-12 sm:py-20 text-center">
+    };
+</script>
     <div class="w-16 h-16 mx-auto mb-6 rounded-full bg-black text-white flex items-center justify-center">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
