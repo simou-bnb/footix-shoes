@@ -1,16 +1,8 @@
-<div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-@script
-<script>
-    if (!window.__ixCheckoutFired && typeof fbq !== 'undefined') {
-        window.__ixCheckoutFired = true;
-        fbq('track', 'InitiateCheckout', {
-            value: {{ $subtotal ?? 0 }},
-            currency: 'DZD',
-            num_items: {{ isset($items) ? $items->sum('quantity') : 0 }}
-        });
-    }
-</script>
-@endscript    <h1 class="text-3xl font-extrabold uppercase tracking-tight mb-8 border-b border-black pb-6">{{ __('Commander') }}</h1>
+@php $pixelData = base64_encode(json_encode(['value'=>(float)($subtotal??0),'currency'=>'DZD','num_items'=>(int)($items?$items->sum('quantity'):0)])); @endphp
+<div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12"
+    data-pixel-event="InitiateCheckout"
+    data-pixel-data="{{ $pixelData }}">
+    <h1 class="text-3xl font-extrabold uppercase tracking-tight mb-8 border-b border-black pb-6">{{ __('Commander') }}</h1>
 
     @if ($items->isEmpty())
         <div class="text-center py-16">

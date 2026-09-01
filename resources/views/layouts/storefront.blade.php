@@ -35,11 +35,17 @@
         function firePixelFromPage() {
             var el = document.querySelector('[data-pixel-event]');
             if (el && typeof fbq !== 'undefined') {
-                try {
-                    var evt  = el.getAttribute('data-pixel-event');
-                    var data = JSON.parse(el.getAttribute('data-pixel-data'));
-                    fbq('track', evt, data);
-                } catch(e) {}
+                if (el.getAttribute('data-pixel-fired') !== 'true') {
+                    try {
+                        var evt  = el.getAttribute('data-pixel-event');
+                        var rawData = el.getAttribute('data-pixel-data');
+                        var data = rawData ? JSON.parse(atob(rawData)) : {};
+                        fbq('track', evt, data);
+                        el.setAttribute('data-pixel-fired', 'true');
+                    } catch(e) {
+                        console.error('Meta Pixel Error:', e);
+                    }
+                }
             }
         }
 
@@ -49,7 +55,6 @@
         // SPA navigation (wire:navigate)
         document.addEventListener('livewire:navigated', function () {
             fbq('track', 'PageView');
-            window.__ixCheckoutFired = false;
             firePixelFromPage();
         });
         </script>
