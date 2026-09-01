@@ -3,10 +3,14 @@
     $mainImage = $product->images->first();
 @endphp
 
-@php $pixelData = base64_encode(json_encode(['content_ids'=>[(string)$product->id],'content_name'=>$product->name,'content_type'=>'product','value'=>(float)$displayPrice,'currency'=>'DZD'])); @endphp
+@php $pixelData = json_encode(['content_ids'=>[(string)$product->id],'content_name'=>$product->name,'content_type'=>'product','value'=>(float)$displayPrice,'currency'=>'DZD']); @endphp
 <div x-data="{ selectedImage: '{{ $mainImage ? Storage::disk('public')->url($mainImage->path) : '' }}' }"
-    data-pixel-event="ViewContent"
-    data-pixel-data="{{ $pixelData }}"
+    x-init="
+        console.log('Triggering ViewContent via Alpine', {{ $pixelData }});
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'ViewContent', {{ $pixelData }});
+        }
+    "
     @cart-updated.window="if(typeof fbq !== 'undefined') fbq('track', 'AddToCart', {
         content_ids: ['{{ $product->id }}'],
         content_name: '{{ addslashes($product->name) }}',
