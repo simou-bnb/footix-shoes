@@ -3,10 +3,7 @@
     $mainImage = $product->images->first();
 @endphp
 
-@php $pixelData = json_encode(['content_ids'=>[(string)$product->id],'content_name'=>$product->name,'content_type'=>'product','value'=>(float)$displayPrice,'currency'=>'DZD']); @endphp
 <div x-data="{ selectedImage: '{{ $mainImage ? Storage::disk('public')->url($mainImage->path) : '' }}' }"
-    data-pixel-event="ViewContent"
-    data-pixel-data='{{ $pixelData }}'
     @cart-updated.window="if(typeof fbq !== 'undefined') fbq('track', 'AddToCart', {
         content_ids: ['{{ $product->id }}'],
         content_name: '{{ addslashes($product->name) }}',
@@ -15,6 +12,19 @@
         currency: 'DZD'
     })"
     class="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+@script
+<script>
+    if (typeof fbq !== 'undefined') {
+        fbq('track', 'ViewContent', {
+            content_ids: ['{{ $product->id }}'],
+            content_name: {{ Js::from($product->name) }},
+            content_type: 'product',
+            value: {{ $displayPrice }},
+            currency: 'DZD'
+        });
+    }
+</script>
+@endscript
     @if (session('added'))
         <div class="mb-6 border border-black bg-black text-white px-4 py-3 text-sm flex items-center justify-between">
             <span>{{ session('added') }} {{ __('ajouté au panier.') }}</span>

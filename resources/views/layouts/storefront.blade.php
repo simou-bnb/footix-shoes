@@ -49,6 +49,7 @@
         // SPA navigation (wire:navigate)
         document.addEventListener('livewire:navigated', function () {
             fbq('track', 'PageView');
+            window.__ixCheckoutFired = false;
             firePixelFromPage();
         });
         </script>
