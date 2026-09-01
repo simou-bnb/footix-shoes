@@ -32,9 +32,24 @@
         fbq('init', '{{ config('services.meta.pixel_id') }}');
         fbq('track', 'PageView');
 
-        // Also fire PageView on each SPA navigation
+        function firePixelFromPage() {
+            var el = document.querySelector('[data-pixel-event]');
+            if (el && typeof fbq !== 'undefined') {
+                try {
+                    var evt  = el.getAttribute('data-pixel-event');
+                    var data = JSON.parse(el.getAttribute('data-pixel-data'));
+                    fbq('track', evt, data);
+                } catch(e) {}
+            }
+        }
+
+        // Initial page load
+        document.addEventListener('DOMContentLoaded', firePixelFromPage);
+
+        // SPA navigation (wire:navigate)
         document.addEventListener('livewire:navigated', function () {
             fbq('track', 'PageView');
+            firePixelFromPage();
         });
         </script>
         <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ config('services.meta.pixel_id') }}&ev=PageView&noscript=1" /></noscript>

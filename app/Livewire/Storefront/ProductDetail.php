@@ -30,18 +30,6 @@ class ProductDetail extends Component
             $this->selectedColor = $only->color;
         }
 
-        $price = (float) $this->product->base_price;
-        $this->js("
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'ViewContent', {
-                    content_ids: ['" . $this->product->id . "'],
-                    content_name: " . json_encode($this->product->name) . ",
-                    content_type: 'product',
-                    value: {$price},
-                    currency: 'DZD'
-                });
-            }
-        ");
     }
 
     public function updatedSelectedSize(): void

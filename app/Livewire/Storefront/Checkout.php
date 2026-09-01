@@ -169,19 +169,6 @@ class Checkout extends Component
         $items    = $cart->items();
         $subtotal = $cart->subtotal();
 
-        if ($items->isNotEmpty()) {
-            $numItems = (int) $items->sum('quantity');
-            $this->js("
-                if (typeof fbq !== 'undefined') {
-                    fbq('track', 'InitiateCheckout', {
-                        value: {$subtotal},
-                        currency: 'DZD',
-                        num_items: {$numItems}
-                    });
-                }
-            ");
-        }
-
         return view('livewire.storefront.checkout', [
             'items'    => $items,
             'subtotal' => $subtotal,
