@@ -81,7 +81,7 @@ class Checkout extends Component
 
         $rateLimitKey = 'place-order:'.request()->ip();
 
-        if (RateLimiter::tooManyAttempts($rateLimitKey, 5)) {
+        if (RateLimiter::tooManyAttempts($rateLimitKey, 15)) {
             $this->addError('cart', 'Trop de commandes envoyées d\'affilée. Réessaie dans quelques minutes.');
 
             return;
