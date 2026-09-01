@@ -1,14 +1,17 @@
 <div class="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+@script
 <script>
-    window.__metaPixelEvent = {
-        name: 'InitiateCheckout',
-        data: {
-            value: {{ $subtotal ?? 0 }},
-            currency: 'DZD',
-            num_items: {{ isset($items) ? $items->sum('quantity') : 0 }}
+    $nextTick(() => {
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'InitiateCheckout', {
+                value: {{ $subtotal ?? 0 }},
+                currency: 'DZD',
+                num_items: {{ isset($items) ? $items->sum('quantity') : 0 }}
+            });
         }
-    };
+    });
 </script>
+@endscript
     <h1 class="text-3xl font-extrabold uppercase tracking-tight mb-8 border-b border-black pb-6">{{ __('Commander') }}</h1>
 
     @if ($items->isEmpty())
