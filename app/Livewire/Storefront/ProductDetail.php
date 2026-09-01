@@ -30,16 +30,18 @@ class ProductDetail extends Component
             $this->selectedColor = $only->color;
         }
 
-        $this->dispatch('meta-pixel', [
-            'event' => 'ViewContent',
-            'data'  => [
-                'content_ids'  => [(string) $this->product->id],
-                'content_name' => $this->product->name,
-                'content_type' => 'product',
-                'value'        => (float) $this->product->base_price,
-                'currency'     => 'DZD',
-            ],
-        ]);
+        $price = (float) $this->product->base_price;
+        $this->js("
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'ViewContent', {
+                    content_ids: ['" . $this->product->id . "'],
+                    content_name: " . json_encode($this->product->name) . ",
+                    content_type: 'product',
+                    value: {$price},
+                    currency: 'DZD'
+                });
+            }
+        ");
     }
 
     public function updatedSelectedSize(): void

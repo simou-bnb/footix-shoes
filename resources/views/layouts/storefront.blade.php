@@ -32,13 +32,6 @@
         fbq('init', '{{ config('services.meta.pixel_id') }}');
         fbq('track', 'PageView');
 
-        // Listen for Pixel events dispatched from Livewire PHP components
-        window.addEventListener('meta-pixel', function (e) {
-            if (typeof fbq !== 'undefined' && e.detail && e.detail[0]) {
-                fbq('track', e.detail[0].event, e.detail[0].data);
-            }
-        });
-
         // Also fire PageView on each SPA navigation
         document.addEventListener('livewire:navigated', function () {
             fbq('track', 'PageView');
