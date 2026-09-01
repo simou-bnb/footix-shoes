@@ -32,22 +32,16 @@
         fbq('init', '{{ config('services.meta.pixel_id') }}');
         fbq('track', 'PageView');
 
-        function __fireMetaPixelQueue() {
-            if (window.__metaPixelEvent && typeof fbq !== 'undefined') {
-                fbq('track', window.__metaPixelEvent.name, window.__metaPixelEvent.data);
-                window.__metaPixelEvent = null;
+        // Listen for Pixel events dispatched from Livewire PHP components
+        window.addEventListener('meta-pixel', function (e) {
+            if (typeof fbq !== 'undefined' && e.detail && e.detail[0]) {
+                fbq('track', e.detail[0].event, e.detail[0].data);
             }
-        }
-
-        // Initial page load (direct URL access or full reload)
-        document.addEventListener('DOMContentLoaded', function () {
-            __fireMetaPixelQueue();
         });
 
-        // SPA navigation via wire:navigate
+        // Also fire PageView on each SPA navigation
         document.addEventListener('livewire:navigated', function () {
             fbq('track', 'PageView');
-            __fireMetaPixelQueue();
         });
         </script>
         <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id={{ config('services.meta.pixel_id') }}&ev=PageView&noscript=1" /></noscript>

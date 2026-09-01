@@ -166,10 +166,24 @@ class Checkout extends Component
 
     public function render(Cart $cart)
     {
+        $items    = $cart->items();
+        $subtotal = $cart->subtotal();
+
+        if ($items->isNotEmpty()) {
+            $this->dispatch('meta-pixel', [
+                'event' => 'InitiateCheckout',
+                'data'  => [
+                    'value'     => (float) $subtotal,
+                    'currency'  => 'DZD',
+                    'num_items' => $items->sum('quantity'),
+                ],
+            ]);
+        }
+
         return view('livewire.storefront.checkout', [
-            'items' => $cart->items(),
-            'subtotal' => $cart->subtotal(),
-            'wilayas' => Wilaya::query()->where('is_active', true)->orderBy('name')->get(),
+            'items'    => $items,
+            'subtotal' => $subtotal,
+            'wilayas'  => Wilaya::query()->where('is_active', true)->orderBy('name')->get(),
         ])->layout('layouts.storefront', ['title' => 'Commander — Footix Shoes']);
     }
 }
