@@ -45,10 +45,17 @@ class Order extends Model
     {
         $prefix = 'ORD-'.now()->format('Ymd').'-';
 
-        $lastNumber = static::where('order_number', 'like', $prefix.'%')
-            ->count();
+        $lastOrder = static::where('order_number', 'like', $prefix.'%')
+            ->orderBy('order_number', 'desc')
+            ->first();
 
-        return $prefix.str_pad((string) ($lastNumber + 1), 4, '0', STR_PAD_LEFT);
+        if (! $lastOrder) {
+            return $prefix.'0001';
+        }
+
+        $lastSequence = (int) substr($lastOrder->order_number, -4);
+
+        return $prefix.str_pad((string) ($lastSequence + 1), 4, '0', STR_PAD_LEFT);
     }
 
     public function wilaya(): BelongsTo
