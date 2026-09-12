@@ -155,11 +155,15 @@ class Checkout extends Component
         $cart->clear();
         $this->dispatch('cart-updated');
 
-        \App\Jobs\SendMetaPurchaseEvent::dispatch(
-            $order,
-            request()->ip(),
-            request()->userAgent()
-        );
+        try {
+            \App\Jobs\SendMetaPurchaseEvent::dispatch(
+                $order,
+                request()->ip(),
+                request()->userAgent()
+            );
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::error('Erreur lors du lancement du Job Meta: ' . $e->getMessage());
+        }
 
         $this->redirect(route('order.confirmation', $order), navigate: true);
     }
