@@ -22,7 +22,7 @@
             <div class="mb-6 border border-red-600 bg-red-50 text-red-700 px-4 py-3 text-sm">{{ $message }}</div>
         @enderror
 
-        <form wire:submit="placeOrder" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+        <form wire:submit="placeOrder" x-data @submit="$el.querySelectorAll('input, select, textarea').forEach(e => e.dispatchEvent(new Event('input', {bubbles:true})))" class="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <div class="absolute -left-[9999px] w-px h-px overflow-hidden" aria-hidden="true">
                 <label for="website">{{ __('Ne pas remplir ce champ') }}</label>
                 <input type="text" id="website" wire:model="website" tabindex="-1" autocomplete="off">
